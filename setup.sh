@@ -1,14 +1,15 @@
 #!/bin/bash
-echo -e "server address(ex:52.522.522.522): "
+
+echo "Enter VPN server address(ex:52.522.522.522): "
 read VPN_SERVER_IP
 
-echo -e "preshared key: "
+echo "Enter preshared key: "
 read VPN_IPSEC_PSK
 
-echo -e "username: "
+echo "Enter username: "
 read VPN_USER
 
-echo -e "LDAP username: "
+echo "Enter password: "
 read VPN_PASSWORD
 
 apt-get update
@@ -88,14 +89,4 @@ touch /var/run/xl2tpd/l2tp-control
 service strongswan restart
 service xl2tpd restart
 
-echo -e 'executing: `ip route`'
-ip route
-
-echo -e 'enter value of X.X.X.X, from previous command.\n default via X.X.X.X ...'
-read GATEWAY_IP
-
-route add $VPN_SERVER_IP gw $GATEWAY_IP
-
-echo -e 'Verify that your traffic is being routed properly.\nwget -qO- http://ipv4.icanhazip.com; echo
-\nThe bellow ip should be your VPN server IP.'
-wget -qO- http://ipv4.icanhazip.com; echo
+exit 0
