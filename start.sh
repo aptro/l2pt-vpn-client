@@ -5,12 +5,12 @@ read VPN_SERVER_IP
 
 echo 'Executing: `ip route`'
 ip route
-
-echo 'Enter value of X.X.X.X, from previous command.\n default via X.X.X.X ...'
+echo '\n'
+echo 'Enter value of X.X.X.X, from: default via X.X.X.X ...'
 read GATEWAY_IP
 
 echo 'If your VPN client is a remote server, you must also exclude your local machine public IP from the new default route, to prevent your SSH session from being disconnected'
-
+echo '\n'
 echo 'Enter your local machine public ip: '
 read LOCAL_PUBLIC_IP
 
