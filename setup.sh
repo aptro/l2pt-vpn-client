@@ -83,10 +83,4 @@ EOF
 
 chmod 600 /etc/ppp/options.l2tpd.client
 
-mkdir -p /var/run/xl2tpd
-touch /var/run/xl2tpd/l2tp-control
-
-service strongswan restart
-service xl2tpd restart
-
 exit 0

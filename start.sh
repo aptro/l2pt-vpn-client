@@ -5,14 +5,18 @@ read VPN_SERVER_IP
 
 echo 'Executing: `ip route`'
 ip route
-echo '\n'
 echo 'Enter value of X.X.X.X, from: default via X.X.X.X ...'
 read GATEWAY_IP
-
-echo 'If your VPN client is a remote server, you must also exclude your local machine public IP from the new default route, to prevent your SSH session from being disconnected'
 echo '\n'
+echo 'If your VPN client is a remote server, you must also exclude your local machine public IP from the new default route, to prevent your SSH session from being disconnected'
 echo 'Enter your local machine public ip: '
 read LOCAL_PUBLIC_IP
+
+mkdir -p /var/run/xl2tpd
+touch /var/run/xl2tpd/l2tp-control
+
+service strongswan restart
+service xl2tpd restart
 
 #start the service
 ipsec up myvpn
@@ -21,14 +25,13 @@ echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 
 route add $VPN_SERVER_IP gw $GATEWAY_IP
 
-if [ -z "${LOCAL_PUBLIC_IP}" ]; then
+if [ "$LOCAL_PUBLIC_IP" ]; then
     route add LOCAL_PUBLIC_IP gw $GATEWAY_IP
 fi
 
 route add default dev ppp0
 
-echo 'Verify that your traffic is being routed properly.\nwget -qO- http://ipv4.icanhazip.com; echo
-\nThe bellow ip should be your VPN server IP.'
+echo 'Verify that your traffic is being routed properly. The bellow ip should be your VPN server IP.'
 wget -qO- http://ipv4.icanhazip.com; echo
 
 exit 0
