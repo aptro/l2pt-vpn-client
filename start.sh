@@ -19,19 +19,26 @@ touch /var/run/xl2tpd/l2tp-control
 service strongswan restart
 service xl2tpd restart
 
+#sleep added to remove inconsistency
+sleep 4s
+
 #start the service
 ipsec up myvpn
 
+#sleep added to remove inconsistency
+sleep 4s
 echo "c myvpn" > /var/run/xl2tpd/l2tp-control
+
+#sleep added to remove inconsistency
+sleep 4s
 
 route add $VPN_SERVER_IP gw $GATEWAY_IP
 
 route add $LOCAL_PUBLIC_IP gw $GATEWAY_IP
 
-sleep 10s
 route add default dev ppp0
 
-echo 'Verify that your traffic is being routed properly. The bellow ip should be your VPN server IP.'
+echo 'Verify that your traffic is being routed properly. The below ip should be your VPN server IP.'
 wget -qO- http://ipv4.icanhazip.com; echo
 
 exit 0

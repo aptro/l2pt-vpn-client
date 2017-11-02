@@ -1,16 +1,16 @@
 # ubuntu-vpn-client
 
-## Setup
+### Setup
 ```
 wget https://git.io/vFsp3 -O setup.sh && sudo sh setup.sh
 ```
 
-## Start
+### Start
 ```
 wget https://git.io/vFshc -O start.sh && sudo sh start.sh
 ```
 
-## Stop
+### Stop
 ```
 wget https://git.io/vFshD -O stop.sh && sudo sh stop.sh
 ```
