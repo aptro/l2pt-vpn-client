@@ -26,9 +26,9 @@ echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 
 route add $VPN_SERVER_IP gw $GATEWAY_IP
 
-route add $LOCAL_PUBLIC_IP gw $GATEWAY_IP;
+route add $LOCAL_PUBLIC_IP gw $GATEWAY_IP
 
-
+sleep 10s
 route add default dev ppp0
 
 echo 'Verify that your traffic is being routed properly. The bellow ip should be your VPN server IP.'
