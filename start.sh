@@ -2,7 +2,7 @@
 echo "Enter VPN server address(ex:52.522.522.522): "
 read VPN_SERVER_IP
 
-
+echo '\n'
 echo 'Executing: `ip route`'
 ip route
 echo 'Enter value of X.X.X.X, from: default via X.X.X.X ...'
@@ -26,7 +26,7 @@ echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 route add $VPN_SERVER_IP gw $GATEWAY_IP
 
 if [ "$LOCAL_PUBLIC_IP" ]; then
-    route add LOCAL_PUBLIC_IP gw $GATEWAY_IP
+    route add $LOCAL_PUBLIC_IP gw $GATEWAY_IP
 fi
 
 route add default dev ppp0
