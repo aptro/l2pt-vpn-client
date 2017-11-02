@@ -8,9 +8,6 @@ ip route
 echo 'Enter value of X.X.X.X, from: default via X.X.X.X ...'
 read GATEWAY_IP
 echo '\n'
-echo 'If your VPN client is a remote server, you must also exclude your local machine public IP from the new default route, to prevent your SSH session from being disconnected'
-echo 'Enter your local machine public ip: '
-read LOCAL_PUBLIC_IP
 
 mkdir -p /var/run/xl2tpd
 touch /var/run/xl2tpd/l2tp-control
@@ -25,9 +22,9 @@ echo "c myvpn" > /var/run/xl2tpd/l2tp-control
 
 route add $VPN_SERVER_IP gw $GATEWAY_IP
 
-if [ "$LOCAL_PUBLIC_IP" ]; then
-    route add $LOCAL_PUBLIC_IP gw $GATEWAY_IP
-fi
+PUBLIC_IP=$(wget -t 3 -T 15 -qO- http://ipv4.icanhazip.com)
+route add $PUBLIC_IP gw $GATEWAY_IP;
+
 
 route add default dev ppp0
 
