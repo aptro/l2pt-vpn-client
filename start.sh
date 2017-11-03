@@ -5,12 +5,13 @@ read VPN_SERVER_IP
 echo '\n'
 echo 'Executing: `ip route`'
 ip route
-echo 'Enter value of X.X.X.X, from: default via X.X.X.X ...'
+echo '\n'
+echo 'Find this line in the output: default via X.X.X.X .... Write down this gateway IP'
 read GATEWAY_IP
 echo '\n'
 
 echo 'If your VPN client is a remote server, you must also exclude your local machine public IP from the new default route, to prevent your SSH session from being disconnected'
-echo 'Enter your local machine public ip: '
+echo "Enter your local machine's public ip: "
 read LOCAL_PUBLIC_IP
 
 mkdir -p /var/run/xl2tpd
